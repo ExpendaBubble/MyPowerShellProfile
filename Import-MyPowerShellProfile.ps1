@@ -1,5 +1,5 @@
 # Variables
-$RepositoryUrl = 'https://github.com/ExpendaBubble/MyPowerShellProfile'
+$RepositoryUrl = 'https://raw.githubusercontent.com/ExpendaBubble/MyPowerShellProfile/refs/heads/main'
 
 Write-Host ""
 Write-Host "⠀⠀⠀⠀⠀⠑⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
