@@ -1,7 +1,9 @@
 # Functions
 function Get-MyPowerShellProfile {
-    $MyPowerShellProfileFunctions | ForEach-Object {
-        Write-Host $_ -ForegroundColor DarkGray
+    Clear-Host
+    Write-Host "My PowerShell Cmdlets.." -ForegroundColor Magenta
+    $MyPowerShellProfileFunctions | Sort-Object | ForEach-Object {
+        Write-Host " $_" -ForegroundColor Magenta
     }
 }
 
@@ -34,7 +36,7 @@ Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠�
 Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠋⣹⣿⠃⠀⠈⣿⣿⣴⠇" -ForegroundColor Magenta
 Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣾⠟⠀⠀⠀⠀⠘⠉⠛⠀" -ForegroundColor Magenta
 Write-Host ""
-Write-Host "LOADING MY FUNCTIONS.. " -ForegroundColor DarkGray -NoNewline
+Write-Host "LOADING MY FUNCTIONS.. " -ForegroundColor Magenta -NoNewline
 
 # Invoking functions
 $MyPowerShellProfileFunctions = @()
@@ -44,6 +46,5 @@ $request.tree | Where-Object { $_.type -eq 'blob' -and $_.path -ne 'Import-MyPow
     $MyPowerShellProfileFunctions += (Split-Path -Path $_.path -Leaf) -replace '.ps1',''
 }
 
-Write-Host "COMPLETE" -BackgroundColor DarkGray
-Write-Host "Get-MyPowerShellProfile" -NoNewline -ForegroundColor DarkGray
-Write-Host " for available CmdLets" -ForegroundColor DarkGray
+Write-Host "COMPLETE" -BackgroundColor Magenta
+Write-Host "-> Get-MyPowerShellProfile for available CmdLets" -ForegroundColor Magenta
