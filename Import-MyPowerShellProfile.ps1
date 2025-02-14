@@ -27,6 +27,6 @@ Write-Host ""
 Write-Host "LOADING MY FUNCTIONS.. " -ForegroundColor Magenta -NoNewline
 
 # Invoking functions
-Invoke-Expression (Invoke-WebRequest -Uri "$RepositoryUrl/Functions/Get-WindowsAppsFromRegistry.ps1").Content
+Invoke-Expression (Invoke-WebRequest -Uri "$RepositoryUrl/Functions/Get-WindowsAppFromRegistry.ps1").Content
 
 Write-Host "COMPLETE" -BackgroundColor Magenta
