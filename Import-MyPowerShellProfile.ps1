@@ -1,9 +1,8 @@
 # Functions
 function Get-MyPowerShellProfile {
-    Clear-Host
     Write-Host "My PowerShell Cmdlets.." -ForegroundColor Magenta
     $MyPowerShellProfileFunctions | Sort-Object | ForEach-Object {
-        Write-Host " $_" -ForegroundColor Magenta
+        Write-Host "-> $_" -ForegroundColor Magenta
     }
 }
 
