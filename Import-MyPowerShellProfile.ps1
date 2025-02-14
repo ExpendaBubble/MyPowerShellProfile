@@ -1,3 +1,10 @@
+# Functions
+function Get-MyPowerShellProfile {
+    $MyPowerShellProfileFunctions | ForEach-Object {
+        Write-Host $_ -ForegroundColor DarkGray
+    }
+}
+
 # Variables
 $ApiReposUrl = 'https://api.github.com/repos'
 $Owner = 'ExpendaBubble'
@@ -9,8 +16,8 @@ Write-Host "⠀⠀⠀⠀⠀⠑⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀�
 Write-Host "⠀⠀⠀⠀⠀⠀⠀⠙⢷⣦⣀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
 Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣷⣿⣾⣿⣧⣄⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
 Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣇⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
-Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣥⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
-Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⠟⠉⠉⢹⣿⣿⣿⣿⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
+Write-Host "⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣥⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
+Write-Host "⠀⠀⠀⠀⠀⠀⠀⠸⣿⠟⠉⠉⢹⣿⣿⣿⣿⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
 Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
 Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
 Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀" -ForegroundColor Magenta
@@ -27,12 +34,16 @@ Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠�
 Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠋⣹⣿⠃⠀⠈⣿⣿⣴⠇" -ForegroundColor Magenta
 Write-Host "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣾⠟⠀⠀⠀⠀⠘⠉⠛⠀" -ForegroundColor Magenta
 Write-Host ""
-Write-Host "LOADING MY FUNCTIONS.. " -ForegroundColor Magenta -NoNewline
+Write-Host "LOADING MY FUNCTIONS.. " -ForegroundColor DarkGray -NoNewline
 
 # Invoking functions
+$MyPowerShellProfileFunctions = @()
 $request = Invoke-RestMethod "$ApiReposUrl/$Owner/$Repository/git/trees/main?recursive=true"
 $request.tree | Where-Object { $_.type -eq 'blob' -and $_.path -ne 'Import-MyPowerShellProfile.ps1' } | ForEach-Object {
-    Invoke-Expression (Invoke-WebRequest -Uri "$RepositoryUrl/$($_.path)").Content
+    Invoke-Expression (Invoke-WebRequest -Uri "$RawUrl/$($_.path)").Content
+    $MyPowerShellProfileFunctions += (Split-Path -Path $_.path -Leaf) -replace '.ps1',''
 }
 
-Write-Host "COMPLETE" -BackgroundColor Magenta
+Write-Host "COMPLETE" -BackgroundColor DarkGray
+Write-Host "Get-MyPowerShellProfile" -NoNewline -ForegroundColor DarkGray
+Write-Host " for available CmdLets" -ForegroundColor DarkGray
