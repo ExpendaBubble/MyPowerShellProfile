@@ -10,7 +10,7 @@ function Uninstall-PreviousModuleVersions {
         foreach ($version in $toRemove) {
             $toRemoveProgress ++
             Write-Progress -Activity "Uninstalling $($module.Name)" -Status 'Uninstalling' -Id 1 -ParentId 0 -PercentComplete ($toRemoveProgress/$toRemove.Count * 100) -CurrentOperation "$($version.Version)"
-            $version | Uninstall-Module -WhatIf
+            $version | Uninstall-Module
         }
     }
 }
