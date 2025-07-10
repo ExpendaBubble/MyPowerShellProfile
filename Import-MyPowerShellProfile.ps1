@@ -6,6 +6,9 @@ function Get-MyPowerShellProfile {
     }
 }
 
+# Preferences
+$ProgressPreference = 'SilentlyContinue'
+
 # Variables
 $ApiReposUrl = 'https://api.github.com/repos'
 $Owner = 'ExpendaBubble'
