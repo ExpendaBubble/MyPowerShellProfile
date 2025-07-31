@@ -5,7 +5,7 @@ function New-EventDrivenScheduledTask {
         [string]$Name,
         [string]$Description,
         [Parameter(Mandatory)]
-        [int]$EventData,
+        [string]$EventData,
         [Parameter(Mandatory)]
         [int]$EventId,
         [Parameter(Mandatory)]
